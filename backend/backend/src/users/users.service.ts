@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
+
+// Hardcoded user data for demonstration purposes
+// Later possible to build user model and persistence layer using other library (TypeORM, Sequelize, Mongoose, etc.))
 @Injectable()
 export class UsersService {
     private readonly users = [
@@ -15,7 +18,7 @@ export class UsersService {
         },
     ];
 
-    async findOne(username: string): Promise<any> {
+    async findUser(username: string): Promise<any> {
         return this.users.find(user => user.username === username);
     }
 }
