@@ -12,7 +12,6 @@ import { Request } from 'express';
 export class AuthGuard implements CanActivate {
     constructor (private jwtService: JwtService) {}
 
-/*************  ✨ Windsurf Command ⭐  *************/
     /**
      * Checks if the Authorization header of the given request is valid.
      * If it is, it will assign the payload of the token to the request object.
@@ -21,7 +20,6 @@ export class AuthGuard implements CanActivate {
      * @param context The execution context of the request.
      * @returns A boolean indicating whether or not the request is allowed to proceed.
      */
-/*******  dfb229ea-ca9f-44ee-98ef-4690c4d11dbe  *******/
     async canActivate(context: ExecutionContext): Promise<boolean> {
         const request = context.switchToHttp().getRequest(); // reference to the request object 
         const token = this.extractTokenFromHeader(request);
@@ -43,7 +41,6 @@ export class AuthGuard implements CanActivate {
         return true;
     }
 
-/*************  ✨ Windsurf Command ⭐  *************/
     /**
      * Extracts the token from the Authorization header of the given request.
      *
@@ -55,7 +52,6 @@ export class AuthGuard implements CanActivate {
      * @param request The request to extract the token from.
      * @returns The extracted token, or undefined if not found.
      */
-/*******  f9e4489f-d101-4b6a-b99b-9632afe14013  *******/
     private extractTokenFromHeader(request: Request): string | undefined {
         const [type, token] = request.headers.authorization?.split(' ') ?? [];
         return type === 'Bearer' ? token : undefined;
