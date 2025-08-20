@@ -7,20 +7,32 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { Request } from 'express';
+import { Reflector } from '@nestjs/core';
+import { IS_PUBLIC_KEY } from 'src/decorators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-    constructor (private jwtService: JwtService) {}
+    constructor (private jwtService: JwtService, private reflector: Reflector) {}
+
 
     /**
-     * Checks if the Authorization header of the given request is valid.
-     * If it is, it will assign the payload of the token to the request object.
-     * If not, it will throw an UnauthorizedException.
-     * 
-     * @param context The execution context of the request.
-     * @returns A boolean indicating whether or not the request is allowed to proceed.
+     * Checks if the incoming request is allowed to reach the route.
+     * If the route is public, the authentication is skipped.
+     * If the route is not public, the authentication token is extracted from the Authorization header.
+     * If the token is valid, the user data is stored in the request object.
+     * If the token is invalid, the request is rejected with an UnauthorizedException.
+     * @param context The execution context of the incoming request.
+     * @returns A boolean indicating whether the request is allowed to reach the route.
      */
     async canActivate(context: ExecutionContext): Promise<boolean> {
+        const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+            context.getHandler(),
+            context.getClass(),
+        ]);
+        if (isPublic) {
+            return true; // If the route is public, skip authentication
+        }
+        
         const request = context.switchToHttp().getRequest(); // reference to the request object 
         const token = this.extractTokenFromHeader(request);
         if (!token) {
@@ -37,7 +49,6 @@ export class AuthGuard implements CanActivate {
         } catch {
             throw new UnauthorizedException('');
         }
-        
         return true;
     }
 

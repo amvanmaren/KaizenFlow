@@ -1,11 +1,13 @@
-import { Body, Controller, Post, HttpCode, HttpStatus, Request, Get, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, HttpCode, HttpStatus, Request, Get, UseGuards} from '@nestjs/common';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
+import { Public } from 'src/decorators';
 
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
 
+    @Public()
     @HttpCode(HttpStatus.OK)
     @Post('login')
     login(@Body() signInDto: Record<string, any>) { // DTO (Data Transfer Object)
