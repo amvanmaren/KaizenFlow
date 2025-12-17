@@ -45,7 +45,7 @@ export default {
   methods: {
     async handleLogin() {
       try {
-        const response = await fetch("http://localhost:3000/api/login", {
+        const response = await fetch("http://localhost:3000/auth/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
