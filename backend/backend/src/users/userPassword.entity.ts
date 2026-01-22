@@ -10,6 +10,6 @@ export class UserPassword {
     hashedPassword: string;
 
     @OneToOne(() => User, user => user.password, { onDelete: 'CASCADE' })
-    @JoinColumn({ name: 'userId' })
+    @JoinColumn({ name: 'id' })
     user: User;
 }
