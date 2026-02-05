@@ -28,7 +28,7 @@
         <button type="submit" class="login-button">Login</button>
       </form>
       <h3>Don't have an account?</h3>
-      <router-link to="/register" class="login-button">Register</router-link>
+      <router-link to="/register" class="register-link-button">Register</router-link>
       <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
     </div>
   </div>
@@ -145,6 +145,21 @@ input {
 
 .login-button:hover {
   background-color: #0056b3;
+}
+
+.register-link-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  display: block;
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
 .error-message {
