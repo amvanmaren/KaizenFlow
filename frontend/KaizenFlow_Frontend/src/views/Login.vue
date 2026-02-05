@@ -1,29 +1,17 @@
 <template>
   <div class="login-outer">
-    <img class="logo" src="@/assets/logo.svg" alt="KaizenFlow Logo"/>
+    <img class="logo" src="@/assets/logo.svg" alt="KaizenFlow Logo" />
     <div class="welcome-message">Welcome to KaizenFlow</div>
     <div class="login-container">
       <h1>Login</h1>
       <form @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            placeholder="Enter your username"
-            required
-          />
+          <input type="text" id="username" v-model="username" placeholder="Enter your username" required />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            v-model="password"
-            placeholder="Enter your password"
-            required
-          />
+          <input type="password" id="password" v-model="password" placeholder="Enter your password" required />
         </div>
         <button type="submit" class="login-button">Login</button>
       </form>
@@ -46,6 +34,12 @@ export default {
   },
   methods: {
     async handleLogin() {
+      this.errorMessage = ""; // Clear previous error message
+
+      if (!this.username.trim() || !this.password.trim()) {
+        this.errorMessage = 'Username and password are both required.';
+        return;
+      }
       try {
         const response = await fetch("http://localhost:3000/auth/login", {
           method: "POST",
