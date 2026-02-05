@@ -1,10 +1,10 @@
-# StudyTracker
+# Kaizen Flow
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 
-StudyTracker is a web and mobile app that helps you track your progress in various skills, including programming, language learning, and productivity. It provides a dashboard to visualize your progress, a scheduling feature to plan your study sessions, and light gamification elements to keep you motivated.
+Kaizen Flow is a web and mobile app that helps you track your progress in various skills, including programming and language learning. It provides a dashboard to visualize your progress, a scheduling feature to plan your study sessions, and light gamification elements to keep you motivated.  First planned integrations are with Wanikani and GitHub.
 
 ## Table of Contents
 
